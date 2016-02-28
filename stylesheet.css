@@ -17,6 +17,11 @@
 
 #messageInput {
 	width: 93%;
-	height: 80px;
+	height: 93%;
+	padding: 0px;
 	resize: none;
+}
+
+#messagesInputDiv {
+	height: 15%;
 }
