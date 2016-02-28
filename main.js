@@ -1,24 +1,25 @@
 $(document).ready(function() {
 	var chatDataRef = new Firebase('https://printingsomebleu.firebaseio.com/chat');
-	var userDataRef = new Firebase('https://printingsomebleu.firebaseio.com/users');
 	var loginDataRef = new Firebase('https://printingsomebleu.firebaseio.com/login');
 
 	var username;
+	var uid = loginDataRef.getAuth().uid;
+	if (uid) {
+		var userDataRef = new Firebase('https://printingsomebleu.firebaseio.com/users/'+uid);
 
-	userDataRef.on('value', function(snapshot) {
-		if (snapshot.val()) {
-			username = snapshot.val()['username'];
-		}
-	});
+		userDataRef.once('value', function(snapshot) {
+			var data = snapshot.val();
+			username = data[Object.keys(data)[0]];
+		});
+
+	} else {
+		username = 'guest'+Math.floor(Math.random() * 10000 + 1);
+	}
 
 	$('#messageInput').keypress(function(e) {
 		if (e.keyCode == 13) {
 			e.preventDefault();
-			if (username) {
-				var name = username;				
-			} else {
-				name = 'guest'+Math.floor(Math.random() * 10000 + 1);
-			}
+			var name = username;
 			var text = $('#messageInput').val();
 			var date = new Date();
 			chatDataRef.push({name: name, text: text, date: date});
