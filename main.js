@@ -13,16 +13,13 @@ $(document).ready(function() {
 
 	$('#clearButton').click(function(e) {
 		messageDataRef.remove();
+		$('#messagesDiv').empty();
 	})
 
 	messageDataRef.on('child_added', function(snapshot) {
 		var data = snapshot.val();
-		displayMessage(data.name, data.text, data.date);
-	});
-
-	function displayMessage(name, text, date) {
-		$('<div/>').text(text).prepend($('<b/>').text(name+': ')).appendTo($('#messagesDiv'));
+		$('<div/>').text(data.text).prepend($('<b/>').text(data.name+': ')).appendTo($('#messagesDiv'));
 		$('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
-	}
+	});
 	
 })
