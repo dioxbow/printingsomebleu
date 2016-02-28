@@ -49,7 +49,11 @@ $(document).ready(function() {
 
 	$('#logout_button').click(function() {
 		loginDataRef.unauth();
-		userDataRef.remove();
+		try {
+			userDataRef.remove();
+		} catch (error) {
+			console.log('No user to exit, assuming guest');
+		}
 		window.location = 'login.html';
 	});
 	
