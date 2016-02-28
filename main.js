@@ -13,7 +13,7 @@ $(document).ready(function() {
 
 	$('#clearButton').click(function(e) {
 		messageDataRef.remove();
-		$('#messagesDiv').empty();
+		//$('#messagesDiv').empty();
 	})
 
 	messageDataRef.on('child_added', function(snapshot) {
@@ -22,7 +22,7 @@ $(document).ready(function() {
 		$('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
 	});
 
-	messageDataRef.on('child_removed', function() {
+	messageDataRef.on('child_removed', function(snapshot) {
 		$('#messagesDiv').empty();
 	})
 	
