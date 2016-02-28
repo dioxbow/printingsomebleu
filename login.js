@@ -10,8 +10,8 @@ $(document).ready(function() {
 			}
 
 			username = $('#username_box').val();
-			var userDataRef = new Firebase('https://printingsomebleu.firebaseio.com/users');
-			userDataRef.update({username: username, uid: loginDataRef.getAuth().uid});
+			var userDataRef = new Firebase('https://printingsomebleu.firebaseio.com/users/'+loginDataRef.getAuth().uid);
+			userDataRef.push(username);
 
 			window.location = 'index.html';
 		});
