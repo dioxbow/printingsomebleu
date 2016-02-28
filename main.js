@@ -18,7 +18,7 @@ $(document).ready(function() {
 
 	messageDataRef.on('child_added', function(snapshot) {
 		var data = snapshot.val();
-		$('<div/>').text(data.text).prepend($('<b/>').text(data.name+': ')).appendTo($('#messagesDiv'));
+		$('<div class="msg"/>').text(data.text).prepend($('<b/>').text(data.name+': ')).appendTo($('#messagesDiv'));
 		$('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
 	});
 
