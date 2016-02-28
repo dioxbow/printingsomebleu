@@ -1,29 +1,49 @@
 $(document).ready(function() {
-	var messageDataRef = new Firebase('https://printingsomebleu.firebaseio.com');
+	var chatDataRef = new Firebase('https://printingsomebleu.firebaseio.com/chat');
+	var userDataRef = new Firebase('https://printingsomebleu.firebaseio.com/users');
+	var loginDataRef = new Firebase('https://printingsomebleu.firebaseio.com/login');
+
+	var username;
+
+	userDataRef.on('value', function(snapshot) {
+		if (snapshot.val()) {
+			username = snapshot.val()['username'];
+		}
+	});
 
 	$('#messageInput').keypress(function(e) {
 		if (e.keyCode == 13) {
 			e.preventDefault();
-			var name = $('#nameInput').val();
+			if (username) {
+				var name = username;				
+			} else {
+				name = 'guest'+Math.floor(Math.random() * 10000 + 1);
+			}
 			var text = $('#messageInput').val();
 			var date = new Date();
-			messageDataRef.push({name: name, text: text, date: date});
+			chatDataRef.push({name: name, text: text, date: date});
 			$('#messageInput').val('');
 		}
 	})
 
 	$('#clearButton').click(function(e) {
-		messageDataRef.remove();
+		chatDataRef.remove();
 	})
 
-	messageDataRef.on('child_added', function(snapshot) {
+	chatDataRef.on('child_added', function(snapshot) {
 		var data = snapshot.val();
 		$('<div class="msg"/>').text(data.text).prepend($('<b/>').text(data.name+': ')).appendTo($('#messagesDiv'));
 		$('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
 	});
 
-	messageDataRef.on('child_removed', function(snapshot) {
+	chatDataRef.on('child_removed', function(snapshot) {
 		$('#messagesDiv').empty();
 	})
+
+	$('#logout_button').click(function() {
+		loginDataRef.unauth();
+		userDataRef.remove();
+		window.location = 'login.html';
+	});
 	
 })
