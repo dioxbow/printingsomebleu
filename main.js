@@ -3,6 +3,7 @@ $(document).ready(function() {
 
 	$('#messageInput').keypress(function(e) {
 		if (e.keyCode == 13) {
+			e.preventDefault();
 			var name = $('#nameInput').val();
 			var text = $('#messageInput').val();
 			var date = new Date();
@@ -13,7 +14,6 @@ $(document).ready(function() {
 
 	$('#clearButton').click(function(e) {
 		messageDataRef.remove();
-		//$('#messagesDiv').empty();
 	})
 
 	messageDataRef.on('child_added', function(snapshot) {
