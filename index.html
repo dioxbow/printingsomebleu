@@ -4,16 +4,25 @@
 	<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
 	<script src="https://cdn.firebase.com/js/client/2.4.1/firebase.js"></script>
 	<script src="main.js"></script>
+	<link rel="stylesheet" type="text/css" href="stylesheet.css">
 	<title>Printing Some Bleu</title>
 
 </head>
 <body>
-
-	<div id='messagesDiv'></div>
-
 	<input type='text' id='nameInput' placeholder='Name'>
-	<input type='text' id='messageInput' placeholder='Message'>
 	<input type='button' id='clearButton' value='Clear Chat'>
+
+	<div id='chat_container'>
+
+		<div id='messagesDiv'></div>
+
+		<div id='messagesInputDiv'>
+			
+			<textarea id='messageInput'></textarea>
+			
+		</div>
+
+	</div>
 
 </body>
 </html>

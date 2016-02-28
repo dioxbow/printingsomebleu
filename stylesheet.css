@@ -1,0 +1,22 @@
+#chat_container {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	width: 25%;
+	padding: 5px;
+	border: solid black;
+}
+
+#messagesDiv {
+	height: 80%;
+	overflow-y: scroll;
+	word-wrap: break-word;
+	margin-bottom: 5px;
+}
+
+#messageInput {
+	width: 93%;
+	height: 80px;
+	resize: none;
+}
