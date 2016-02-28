@@ -21,5 +21,9 @@ $(document).ready(function() {
 		$('<div/>').text(data.text).prepend($('<b/>').text(data.name+': ')).appendTo($('#messagesDiv'));
 		$('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
 	});
+
+	messageDataRef.on('child_removed', function() {
+		$('#messagesDiv').empty();
+	})
 	
 })
