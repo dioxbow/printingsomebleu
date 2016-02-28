@@ -3,7 +3,13 @@ $(document).ready(function() {
 	var loginDataRef = new Firebase('https://printingsomebleu.firebaseio.com/login');
 
 	var username;
-	var uid = loginDataRef.getAuth().uid;
+
+	try{
+		var uid = loginDataRef.getAuth().uid;		
+	} catch(error) {
+		console.log('Error loading user, defaulting to guest');
+	}
+
 	if (uid) {
 		var userDataRef = new Firebase('https://printingsomebleu.firebaseio.com/users/'+uid);
 
